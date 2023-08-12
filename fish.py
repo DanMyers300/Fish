@@ -3,43 +3,12 @@ import time
 import random
 
 class Fish:
-    def __init__(self, name, species, health, age, hunger, happiness):
+    def __init__(self, name, health, age, hunger):
         self.name = name
-        self.species = species
         self.health = health
         self.age = age
         self.hunger = hunger
-        self.happiness = happiness
 
-    def feed(self):
-        self.hunger = 0
-        self.happiness += 1
-
-    def play(self):
-        self.happiness += 1
-        self.hunger += 1
-
-    def check_health(self):
-        if self.hunger > 5:
-            self.health -= 1
-        if self.happiness < 5:
-            self.health -= 1
-
-    def max_happiness(self):
-        if self.happiness > 5:
-            self.happiness = 5
-        if self.happiness < 0:
-            self.happiness = 0
-
-    def max_hunger(self):
-        if self.hunger > 5:
-            self.hunger = 5
-        if self.hunger < 0:
-            self.hunger = 0
-
-    def max_age(self):
-        if self.age > 10:
-            self.health -= 0
 
 class RunTank:
     @staticmethod
@@ -66,6 +35,17 @@ class RunTank:
         for line in fish_lines:
             fish_swimming[line] = 1
 
+        fish_objects = []  # List to store fish objects
+
+        for _ in range(rows):
+            fish_name = f"Fish{_+1}"
+            fish_health = random.randint(1, 5)
+            fish_age = random.randint(1, 5)
+            fish_hunger = random.randint(1, 5)
+
+            new_fish = Fish(fish_name, fish_health, fish_age, fish_hunger)
+            fish_objects.append(new_fish)
+
         fish_positions = [random.randint(0, columns - fish_length) for _ in range(rows)]
         fish_directions = [1 if random.randint(0, 1) == 0 else -1 for _ in range(rows)]
 
@@ -88,7 +68,8 @@ class RunTank:
                     else:
                         fish_directions[line_idx] = -direction
 
-                    print(" " * fish_positions[line_idx] + fish_char)
+                    print(" " * fish_positions[line_idx] + fish_char) 
+
                 else:
                     print()
 
