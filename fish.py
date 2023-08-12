@@ -14,7 +14,7 @@ def main():
 
     fish = ">°)))彡"
     fish_flipped = flip_fish(fish)
-    fish_length = len(fish)
+    fish_length = len(fish) #My fish was this long :O
     
     num_fish_lines = random.randint(1, rows - 1)
     fish_lines = random.sample(range(1, rows), num_fish_lines)
@@ -29,22 +29,22 @@ def main():
     while True:
         rows, columns = get_terminal_size()
 
-        os.system('clear')  # Clear the terminal screen
+        os.system('clear')
         for line_idx, fish_present in enumerate(fish_swimming):
             if fish_present:
                 fish_x = fish_positions[line_idx]
                 direction = fish_directions[line_idx]
                 
-                if direction == 1:
-                    fish_char = fish_flipped
-                else:
+                if direction == -1:
                     fish_char = fish
+                else:
+                    fish_char = fish_flipped
                 
                 if 0 <= fish_x + direction < columns - fish_length:
                     fish_positions[line_idx] += direction
                 else:
-                    fish_directions[line_idx] = -direction  # Reverse direction
-                
+                    fish_directions[line_idx] = -direction
+
                 print(" " * fish_positions[line_idx] + fish_char)
                 
             else:
